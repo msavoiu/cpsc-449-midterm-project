@@ -31,11 +31,11 @@ public class BookingService {
 
     public Booking cancelBooking(Long id) {
         // Check if booking exists
-        if (!repo.find(id)) {
+        if (!repo.findById(id)) {
             throw new Exception("This booking does not exist");
         }
         // Check if booking has already been cancelled
-        if (repo.find(id).status == CANCELLED) {
+        if (repo.findById(id).status == CANCELLED) {
             throw new Exception("This booking has already been cancelled.");
         }
 

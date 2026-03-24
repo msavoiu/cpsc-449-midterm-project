@@ -1,5 +1,13 @@
 package com.app.repositories;
 
-public class AttendeeRepository {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AttendeeRepository extends JpaRepository<Attendee, Long> {
+    public List<Attendee> create() {
+
+    }
+
+    public List<Booking> repo.findBookings(id) {
+        
+    }
 }

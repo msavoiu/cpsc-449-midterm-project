@@ -3,12 +3,12 @@ package com.app.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.app.repositories.OrganizerRespository;
+import com.app.repositories.OrganizerRepository;
 
 @Service
 public class OrganizerService {
     @Autowired
-    private OrganizerRespository repo;
+    private OrganizerRepository repo;
 
     public Organizer createOrganizer(Organizer organizer) {
         return repo.create(organizer);
