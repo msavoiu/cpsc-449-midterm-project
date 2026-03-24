@@ -7,11 +7,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.services.BookingService;
+
 @RestController
 @RequestMapping("/api/bookings")
 public class BookingController {
     @Autowired
-    private attendeeService service;
+    private BookingService service;
+
+    // POST /api/bookings
+    @PostMapping
+    public Booking create(Booking booking) {
+        try {
+            return service.createBooking(booking);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
 
     // POST /api/bookings/{id}/cancel
     @PostMapping
