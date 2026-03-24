@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.entities.Venue;
+import com.app.services.VenueService;
+
 @RestController
 @RequestMapping("/api/venues")
 public class VenueController {

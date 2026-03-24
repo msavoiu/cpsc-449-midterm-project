@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.entities.Organizer;
+import com.app.services.OrganizerService;
+
 @RestController
 @RequestMapping("/api/organizers")
 public class OrganizerController {
