@@ -50,4 +50,17 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "ticket_type_id", nullable = false)
     private TicketType ticket_type;
+
+    // Getters
+    public TicketType ticketType() {
+        return ticket_type;
+    }
+
+    public Attendee attendee() {
+        return attendee;
+    }
+
+    public BookingStatus paymentStatus() {
+        return payment_status;
+    }
 }

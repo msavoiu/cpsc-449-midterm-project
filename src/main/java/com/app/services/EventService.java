@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.entities.Event;
 import com.app.repositories.EventRepository;
 
 @Service
@@ -13,7 +14,7 @@ public class EventService {
     private EventRepository repo;
 
     public Event createEvent(Event event) {
-        return repo.create(event);
+        return repo.save(event);
     }
 
     public List<Event> getUpcomingEvents() {

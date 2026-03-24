@@ -12,6 +12,6 @@ public class OrganizerService {
     private OrganizerRepository repo;
 
     public Organizer createOrganizer(Organizer organizer) {
-        return repo.create(organizer);
+        return repo.save(organizer);
     }
 }

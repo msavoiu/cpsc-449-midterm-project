@@ -7,12 +7,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "events")
+@Table(name = "attendees")
 public class Attendee {
     @Id
     @GeneratedValue(strategy =
         GenerationType.IDENTITY
     )
-    private Long event_id;
+    private Long attendee_id;
     
+    // Getters
+    public Long id() {
+        return attendee_id;
+    }
 }

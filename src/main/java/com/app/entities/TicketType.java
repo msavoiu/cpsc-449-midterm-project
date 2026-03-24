@@ -2,12 +2,19 @@ package com.app.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "ticket_types")
 public class TicketType {
+    @Id
+    @GeneratedValue(strategy =
+        GenerationType.IDENTITY
+    )
+    private Long ticket_type_id;
     
     @Column(name = "name",
         nullable = false, // does this mean optional?
@@ -20,4 +27,9 @@ public class TicketType {
 
     @Column(name = "quantity_available")
     private Long quantity_available;
+
+    // Getters
+    public Long id() {
+        return ticket_type_id;
+    }
 }
