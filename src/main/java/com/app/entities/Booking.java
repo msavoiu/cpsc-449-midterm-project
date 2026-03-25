@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,6 +43,11 @@ public class Booking {
     @Column(name = "payment_status")
     private BookingStatus payment_status;
 
+   // Event foreign key
+    @OneToOne
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
+
     // Junction table foreign keys
     @ManyToOne
     @JoinColumn(name = "attendee_id", nullable = false)
@@ -52,15 +58,48 @@ public class Booking {
     private TicketType ticket_type;
 
     // Getters
-    public TicketType ticketType() {
+    public Long getBookingId() {
+        return booking_id;
+    }
+
+    public String getBookingReference() {
+        return booking_reference;
+    }
+
+    public LocalDateTime getDate() {
+        return booking_date;
+    }
+
+    public TicketType getTicketType() {
         return ticket_type;
     }
 
-    public Attendee attendee() {
+    public Event getEvent() {
+        return event;
+    }
+
+    public Attendee getAttendee() {
         return attendee;
     }
 
-    public BookingStatus paymentStatus() {
+    public BookingStatus getPaymentStatus() {
         return payment_status;
+    }
+
+    // Setters
+    public void setReference(String booking_reference) {
+        this.booking_reference = booking_reference;
+    }
+
+    public void setAttendee(Attendee attendee) {
+        this.attendee = attendee;
+    }
+
+    public void setTicketType(TicketType ticket_type) {
+        this.ticket_type = ticket_type;
+    }
+
+    public void setPaymentStatus(BookingStatus payment_status) {
+        this.payment_status = payment_status;
     }
 }

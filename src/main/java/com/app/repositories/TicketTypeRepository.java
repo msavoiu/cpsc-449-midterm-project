@@ -6,6 +6,20 @@ import org.springframework.data.jpa.repository.Query;
 import com.app.entities.TicketType;
 
 public interface TicketTypeRepository extends JpaRepository<TicketType, Long> {
-    @Query()
-    public Long findQuantityAvailable(Long id);
+    public TicketType findByTicketTypeId(Long id);
+    
+    // @Query("""
+    //         SELECT tt.quantity_available
+    //         FROM TicketType tt
+    //         WHERE tt.ticket_type_id = :id
+    //         """)
+    // public Long findQuantityAvailable(Long id);
+    public Long findQuantityAvailableByTicketTypeId(Long id);
+
+    @Query("""
+            UPDATE TicketType tt
+            SET quantity_available = quantity_available - :decrement
+            WHERE tt.ticket_type_id = :id
+            """)
+    public void decreaseQuantityAvailable(Long id, int decrement);
 }

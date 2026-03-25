@@ -6,22 +6,25 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.app.dtos.response.RevenueDTO;
 import com.app.entities.Event;
+import com.app.enums.EventStatus;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
-    @Query("SELECT e FROM Event WHERE e.status = com.app.enums.EventStatus.UPCOMING;")
-    public List<Event> findUpcoming();
+    public Event findByEventId(Long id);
+    
+    public List<Event> findByEventStatus(EventStatus status);
 
-    // Find all CONFIRMED bookings for ALL ticket types belonging to the event
+    // Find event title and all CONFIRMED bookings for ALL ticket types belonging to the event
     // Query needs to be checked
     @Query("""
-        SELECT SUM(tt.price)
-        FROM Booking b
-        JOIN b.TicketType tt
-        WHERE tt.ticket_id IN (
-            SELECT t.ticket_id FROM Event e
-            JOIN e.ticket_types t WHERE e.id = :id
-        )
+            SELECT e.title, SUM(tt.price)
+            FROM Event e
+            JOIN e.ticket_types tt
+            JOIN Booking b ON b.ticket_type = tt
+            WHERE b.payment_status = com.app.enums.BookingStatus.CONFIRMED
+                AND e.id = :id
+            GROUP BY e.title
         """)
-    public Double findEventRevenue(@Param("id") Long id);
+    public RevenueDTO findEventRevenue(@Param("id") Long id);
 }

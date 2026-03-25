@@ -3,6 +3,8 @@ package com.app.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dtos.response.EventResponseDTO;
+import com.app.dtos.response.RevenueDTO;
+import com.app.entities.Event;
 import com.app.services.EventService;
 
 @RestController
@@ -20,41 +25,45 @@ public class EventController {
 
     // POST /api/events
     @PostMapping
-    public Event create(@RequestBody Event event) {
+    public ResponseEntity<?> create(@RequestBody Event event) {
         try {
-            return service.createEvent(event);
+            EventResponseDTO dto = service.createEvent(event);
+            return ResponseEntity.status(HttpStatus.CREATED).body(dto);
         } catch (Exception e) {
-            // TODO: handle exception
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
-    // GET /api/events (filtered by UPCOMING)
+    // GET /api/events (upcoming only)
     @GetMapping
-    public List<Event> getUpcoming() {
+    public ResponseEntity<?> getUpcoming() {
         try {
-            return service.getUpcomingEvents();
+            List<EventResponseDTO> dto = service.getUpcomingEvents();
+            return ResponseEntity.status(HttpStatus.OK).body(dto);
         } catch (Exception e) {
-            // TODO: handle exception
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
     // GET /api/events/{id}
-    @GetMapping
-    public Event getById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
         try {
-            return service.getEvent(id);
+            EventResponseDTO dto = service.getEvent(id);
+            return ResponseEntity.status(HttpStatus.OK).body(dto);
         } catch (Exception e) {
-            // TODO: handle exception
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
     // GET /api/events/{id}/revenue
-    @GetMapping
-    public Double revenue(@PathVariable Long id) {
+    @GetMapping("/{id}/revenue")
+    public ResponseEntity<?> revenue(@PathVariable Long id) {
         try {
-            return service.eventRevenue(id);
+            RevenueDTO dto = service.eventRevenue(id);
+            return ResponseEntity.status(HttpStatus.OK).body(dto);
         } catch (Exception e) {
-            // TODO: handle exception
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 }

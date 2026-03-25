@@ -6,17 +6,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.app.dtos.response.BookingResponseDTO;
 import com.app.entities.Attendee;
-import com.app.entities.Booking;
 
 public interface AttendeeRepository extends JpaRepository<Attendee, Long> {
-    // get all bookings for an attendee, use JOIN? to include event title
-    // CHECK QUERY
+    public Attendee findByAttendeeId(Long id);
+    
+    // Get all bookings for an attendee, include event title
     @Query("""
-            SELECT b FROM Booking b
-            LEFT JOIN b.ticket_type tt
-            LEFT JOIN tt.event e
-            WHERE b.attendee_id = :id
-            """)
-    public List<Booking> findBookings(@Param("id") Long id);
+        SELECT new com.app.dtos.response.BookingResponseDTO(b)
+        FROM Booking b
+        WHERE b.attendee.attendee_id = :id
+    """)
+    public List<BookingResponseDTO> findBookings(@Param("id") Long id);
 }

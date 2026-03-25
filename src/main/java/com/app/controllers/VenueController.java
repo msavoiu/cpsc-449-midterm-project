@@ -1,10 +1,14 @@
 package com.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dtos.response.VenueResponseDTO;
 import com.app.entities.Venue;
 import com.app.services.VenueService;
 
@@ -14,12 +18,14 @@ public class VenueController {
     @Autowired
     private VenueService service;
 
+    // POST /api/venues
     @PostMapping
-    public Venue create(Venue venue) {
+    public ResponseEntity<?> create(@RequestBody Venue venue) {
         try {
-            return service.createVenue(venue);
+            VenueResponseDTO dto = service.createVenue(venue);
+            return ResponseEntity.status(HttpStatus.CREATED).body(dto);
         } catch (Exception e) {
-            // TODO: handle exception
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 }

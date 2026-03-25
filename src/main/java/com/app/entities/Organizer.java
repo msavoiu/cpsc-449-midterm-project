@@ -47,4 +47,26 @@ public class Organizer {
     )
     @JoinColumn(name = "organizer_id")
     private List<Event> events;
+
+
+    // Getters
+    public Long getOrganizerId() {
+        return organizer_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }   
 }

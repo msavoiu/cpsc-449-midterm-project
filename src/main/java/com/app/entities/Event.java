@@ -15,6 +15,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -55,4 +56,49 @@ public class Event {
     )
     @JoinColumn(name = "event_id")
     private List<TicketType> ticket_types;
+
+    // Bi-directional relationships for accessing associated organizer and venue
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organizer_id",
+        nullable = false)
+    private Organizer organizer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "venue_id",
+        nullable = false)
+    private Venue venue;
+
+
+    // Getters
+    public Long getEventId() {
+        return event_id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDate getEventDate() {
+        return event_date;
+    }
+
+    public EventStatus getEventStatus() {
+        return event_status;
+    }
+
+    public List<TicketType> getTicketTypes() {
+        return ticket_types;
+    }
+
+    public Organizer getOrganizer() {
+        return organizer;
+    }
+
+    public Venue getVenue() {
+        return venue;
+    }
 }

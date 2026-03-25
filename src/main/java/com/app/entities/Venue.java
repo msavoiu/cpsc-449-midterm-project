@@ -51,4 +51,30 @@ public class Venue {
     )
     @JoinColumn(name = "venue_id")
     private List<Event> events;
+
+
+    // Getters
+    public Long getVenueId() {
+        return venue_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public Long getTotalCapacity() {
+        return total_capacity;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
 }

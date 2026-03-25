@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 import com.app.entities.Booking;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
+    public Booking findByBookingId(Long id);
+    
     // Change booking payment_status to CANCELLED & restore ticket inventory
     @Query("""
             UPDATE Booking b
@@ -25,4 +27,6 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             )
             """)
     public Booking restoreTicketInventory(@Param("id") Long id);
+
+    boolean existsByAttendee_AttendeeIdAndTicketType_TicketTypeId(Long attendeeId, Long ticketTypeId);
 }

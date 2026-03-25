@@ -29,7 +29,19 @@ public class TicketType {
     private Long quantity_available;
 
     // Getters
-    public Long id() {
+    public Long getTicketTypeId() {
         return ticket_type_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public Long getQuantityAvailable() {
+        return quantity_available;
     }
 }
