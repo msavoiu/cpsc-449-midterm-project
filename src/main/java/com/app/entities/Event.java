@@ -101,4 +101,38 @@ public class Event {
     public Venue getVenue() {
         return venue;
     }
+
+    
+    // Setters
+    public void setEventId(Long event_id) {
+        this.event_id = event_id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setEventDate(LocalDate event_date) {
+        this.event_date = event_date;
+    }
+
+    public void setEventStatus(EventStatus event_status) {
+        this.event_status = event_status;
+    }
+
+    public void setTicketTypes(List<TicketType> ticket_types) {
+        this.ticket_types = ticket_types;
+    }
+
+    public void setOrganizer(Organizer organizer) {
+        this.organizer = organizer;
+    }
+
+    public void setVenue(Venue venue) {
+        this.venue = venue;
+    }
 }

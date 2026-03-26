@@ -69,4 +69,25 @@ public class Organizer {
     public List<Event> getEvents() {
         return events;
     }   
+
+    // Setters
+    public void setOrganizerId(Long organizer_id) {
+        this.organizer_id = organizer_id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+}
 }

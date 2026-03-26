@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dtos.request.BookingRequestDTO;
 import com.app.dtos.response.BookingResponseDTO;
-import com.app.entities.Booking;
 import com.app.services.BookingService;
 
 @RestController
@@ -36,7 +35,7 @@ public class BookingController {
     }
 
     // POST /api/bookings/{id}/cancel
-    @PostMapping("/{id}/cancel")
+    @PostMapping("/{id}/v")
     public ResponseEntity<String> cancel(@PathVariable Long id) {
         try {
             service.cancelBooking(id);

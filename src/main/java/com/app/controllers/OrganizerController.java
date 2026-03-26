@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dtos.request.OrganizerRequestDTO;
 import com.app.dtos.response.OrganizerResponseDTO;
-import com.app.entities.Organizer;
 import com.app.services.OrganizerService;
 
 @RestController
@@ -20,9 +20,9 @@ public class OrganizerController {
 
     // POST /api/organizers
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Organizer organizer) {
+    public ResponseEntity<?> create(@RequestBody OrganizerRequestDTO organizer_req) {
         try {
-            OrganizerResponseDTO dto = service.createOrganizer(organizer);
+            OrganizerResponseDTO dto = service.createOrganizer(organizer_req);
             return ResponseEntity.status(HttpStatus.CREATED).body(dto);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

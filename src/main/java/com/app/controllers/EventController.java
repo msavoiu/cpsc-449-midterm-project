@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dtos.request.EventRequestDTO;
 import com.app.dtos.response.EventResponseDTO;
 import com.app.dtos.response.RevenueDTO;
-import com.app.entities.Event;
 import com.app.services.EventService;
 
 @RestController
@@ -25,9 +25,9 @@ public class EventController {
 
     // POST /api/events
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Event event) {
+    public ResponseEntity<?> create(@RequestBody EventRequestDTO event_req) {
         try {
-            EventResponseDTO dto = service.createEvent(event);
+            EventResponseDTO dto = service.createEvent(event_req);
             return ResponseEntity.status(HttpStatus.CREATED).body(dto);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

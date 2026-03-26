@@ -11,11 +11,14 @@ import com.app.dtos.response.BookingResponseDTO;
 import com.app.entities.Attendee;
 import com.app.repositories.AttendeeRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class AttendeeService {
     @Autowired
     private AttendeeRepository repo;
 
+    @Transactional
     public AttendeeResponseDTO registerAttendee(Attendee attendee) {
         Attendee registered_attendee = repo.save(attendee);
         return new AttendeeResponseDTO(registered_attendee);
