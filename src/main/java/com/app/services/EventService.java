@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.dtos.RevenueDTO;
 import com.app.dtos.request.EventRequestDTO;
 import com.app.dtos.response.EventResponseDTO;
-import com.app.dtos.response.RevenueDTO;
 import com.app.entities.Event;
 import com.app.entities.Organizer;
 import com.app.entities.Venue;
@@ -22,40 +22,44 @@ import jakarta.transaction.Transactional;
 @Service
 public class EventService {
     @Autowired
-    private EventRepository event_repo;
-    private OrganizerRepository organizer_repo;
-    private VenueRepository venue_repo;
+    private EventRepository eventRepo;
+
+    @Autowired
+    private OrganizerRepository organizerRepo;
+
+    @Autowired
+    private VenueRepository venueRepo;
 
     @Transactional
-    public EventResponseDTO createEvent(EventRequestDTO event_req) {
+    public EventResponseDTO createEvent(EventRequestDTO eventReq) {
         // Construct Event object to send to database
         Event event = new Event();
-        event.setTitle(event_req.getTitle());
-        event.setDescription(event_req.getDescription());
-        event.setEventDate(event_req.getEventDate());
-        event.setEventStatus(event_req.getEventStatus());
+        event.setTitle(eventReq.getTitle());
+        event.setDescription(eventReq.getDescription());
+        event.setEventDate(eventReq.getEventDate());
+        event.setEventStatus(eventReq.getEventStatus());
 
-        Organizer organizer = organizer_repo.findById(event_req.getOrganizerId())
+        Organizer organizer = organizerRepo.findById(eventReq.getOrganizerId())
             .orElseThrow(() -> new RuntimeException("Organizer not found"));
-        Venue venue = venue_repo.findById(event_req.getVenueId())
+        Venue venue = venueRepo.findById(eventReq.getVenueId())
             .orElseThrow(() -> new RuntimeException("Venue not found"));
 
         event.setOrganizer(organizer);
         event.setVenue(venue);
         
-        Event saved_event = event_repo.save(event);
-        return new EventResponseDTO(saved_event);
+        Event savedEvent = eventRepo.save(event);
+        return new EventResponseDTO(savedEvent);
     }
 
     public List<EventResponseDTO> getUpcomingEvents() {
-        return event_repo.findByEventStatus(EventStatus.UPCOMING)
+        return eventRepo.findByEventStatus(EventStatus.UPCOMING)
             .stream()
             .map(EventResponseDTO::new)
             .toList();
     }
 
     public EventResponseDTO getEvent(Long id) throws Exception {
-        Event event = event_repo.findByEventId(id);
+        Event event = eventRepo.findByEventId(id);
 
         if (event == null) {
             throw new EntityNotFoundException("Event not found.");
@@ -65,6 +69,16 @@ public class EventService {
     }
 
     public RevenueDTO eventRevenue(Long id) {
-        return event_repo.findEventRevenue(id);
+        List<Object[]> revenueRes = eventRepo.findEventRevenue(id);
+
+        if (revenueRes == null || revenueRes.isEmpty()) {
+            return null;
+        }
+
+        Object[] result = revenueRes.get(0);
+        
+        String title = (String) result[0];
+        Double revenue = (Double) result[1];
+        return new RevenueDTO(title, revenue);
     }
 }

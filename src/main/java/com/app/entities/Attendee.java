@@ -14,7 +14,7 @@ public class Attendee {
     @GeneratedValue(strategy =
         GenerationType.IDENTITY
     )
-    private Long attendee_id;
+    private Long attendeeId;
 
     @Column(name = "name",
         nullable = false,
@@ -31,7 +31,7 @@ public class Attendee {
     
     // Getters
     public Long getAttendeeId() {
-        return attendee_id;
+        return attendeeId;
     }
 
     public String getName() {
@@ -40,5 +40,19 @@ public class Attendee {
 
     public String getEmail() {
         return email;
+    }
+
+
+    // Getters
+    public void setAttendeeId(Long attendee_id) {
+        this.attendeeId = attendee_id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

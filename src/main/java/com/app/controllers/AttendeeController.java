@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dtos.request.AttendeeRequestDTO;
 import com.app.dtos.response.AttendeeBookingsDTO;
 import com.app.dtos.response.AttendeeResponseDTO;
-import com.app.entities.Attendee;
 import com.app.services.AttendeeService;
 
 @RestController
@@ -25,9 +25,9 @@ public class AttendeeController {
 
     // POST /api/attendees
     @PostMapping
-    public ResponseEntity<?> register(@RequestBody Attendee attendee) {
+    public ResponseEntity<?> register(@RequestBody AttendeeRequestDTO attendeeReq) {
         try {
-            AttendeeResponseDTO dto = service.registerAttendee(attendee);
+            AttendeeResponseDTO dto = service.registerAttendee(attendeeReq);
             return ResponseEntity.status(HttpStatus.CREATED).body(dto);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

@@ -16,14 +16,14 @@ public class OrganizerService {
     private OrganizerRepository repo;
 
     @Transactional
-    public OrganizerResponseDTO createOrganizer(OrganizerRequestDTO organizer_req) {
+    public OrganizerResponseDTO createOrganizer(OrganizerRequestDTO organizerReq) {
         // Construct organizer object to put in database
         Organizer organizer = new Organizer();
-        organizer.setName(organizer_req.getName());
-        organizer.setEmail(organizer_req.getEmail());
-        organizer.setPhone(organizer_req.getPhone());
+        organizer.setName(organizerReq.getName());
+        organizer.setEmail(organizerReq.getEmail());
+        organizer.setPhone(organizerReq.getPhone());
 
-        Organizer saved_organizer = repo.save(organizer);
-        return new OrganizerResponseDTO(saved_organizer);
+        Organizer savedOrganizer = repo.save(organizer);
+        return new OrganizerResponseDTO(savedOrganizer);
     }
 }

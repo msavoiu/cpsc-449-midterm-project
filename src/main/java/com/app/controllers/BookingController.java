@@ -21,13 +21,9 @@ public class BookingController {
 
     // POST /api/bookings
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody BookingRequestDTO request) {
+    public ResponseEntity<?> create(@RequestBody BookingRequestDTO bookingReq) {
         try {
-            BookingResponseDTO dto = service.createBooking(
-                request.eventTitle(),
-                request.attendeeId(),
-                request.ticketTypeId()
-            );
+            BookingResponseDTO dto = service.createBooking(bookingReq);
             return ResponseEntity.status(HttpStatus.CREATED).body(dto);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
@@ -35,7 +31,7 @@ public class BookingController {
     }
 
     // POST /api/bookings/{id}/cancel
-    @PostMapping("/{id}/v")
+    @PostMapping("/{id}/cancel")
     public ResponseEntity<String> cancel(@PathVariable Long id) {
         try {
             service.cancelBooking(id);

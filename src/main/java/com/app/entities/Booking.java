@@ -25,26 +25,26 @@ public class Booking {
     @GeneratedValue(strategy =
         GenerationType.IDENTITY
     )
-    private Long booking_id;
+    private Long bookingId;
 
     @Column(name = "booking_reference",
-        nullable = false,
+        nullable = true,
         length = 20
     )
-    private String booking_reference;
+    private String bookingReference;
 
     @CreationTimestamp
     @Column(name = "booking_date",
         updatable = false
     )
-    private LocalDateTime booking_date;
+    private LocalDateTime bookingDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "payment_status")
-    private BookingStatus payment_status;
+    private BookingStatus paymentStatus;
 
    // Event foreign key
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
@@ -55,23 +55,23 @@ public class Booking {
     
     @ManyToOne
     @JoinColumn(name = "ticket_type_id", nullable = false)
-    private TicketType ticket_type;
+    private TicketType ticketType;
 
     // Getters
     public Long getBookingId() {
-        return booking_id;
+        return bookingId;
     }
 
     public String getBookingReference() {
-        return booking_reference;
+        return bookingReference;
     }
 
     public LocalDateTime getDate() {
-        return booking_date;
+        return bookingDate;
     }
 
     public TicketType getTicketType() {
-        return ticket_type;
+        return ticketType;
     }
 
     public Event getEvent() {
@@ -83,23 +83,35 @@ public class Booking {
     }
 
     public BookingStatus getPaymentStatus() {
-        return payment_status;
+        return paymentStatus;
     }
 
     // Setters
-    public void setReference(String booking_reference) {
-        this.booking_reference = booking_reference;
-    }
+        public void setBookingId(Long bookingId) {
+            this.bookingId = bookingId;
+        }
 
-    public void setAttendee(Attendee attendee) {
-        this.attendee = attendee;
-    }
+        public void setBookingReference(String bookingReference) {
+            this.bookingReference = bookingReference;
+        }
 
-    public void setTicketType(TicketType ticket_type) {
-        this.ticket_type = ticket_type;
-    }
+        public void setDate(LocalDateTime bookingDate) {
+            this.bookingDate = bookingDate;
+        }
 
-    public void setPaymentStatus(BookingStatus payment_status) {
-        this.payment_status = payment_status;
-    }
+        public void setTicketType(TicketType ticketType) {
+            this.ticketType = ticketType;
+        }
+
+        public void setEvent(Event event) {
+            this.event = event;
+        }
+
+        public void setAttendee(Attendee attendee) {
+            this.attendee = attendee;
+        }
+
+        public void setPaymentStatus(BookingStatus paymentStatus) {
+            this.paymentStatus = paymentStatus;
+        }
 }

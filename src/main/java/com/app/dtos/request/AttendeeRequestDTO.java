@@ -1,10 +1,17 @@
 package com.app.dtos.request;
 
-public class OrganizerRequestDTO {
+import com.app.entities.Attendee;
 
+public class AttendeeRequestDTO {
     private String name;
     private String email;
-    private String phone;
+
+    public AttendeeRequestDTO(Attendee attendee) {
+        this.name = attendee.getName();
+        this.email = attendee.getEmail();
+    }
+
+    public AttendeeRequestDTO() {}
 
     // Getters
     public String getName() {
@@ -15,20 +22,13 @@ public class OrganizerRequestDTO {
         return email;
     }
 
-    public String getPhone() {
-        return phone;
-    }
 
-    // Setters
+    // Getters
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
-    }
-   
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 }

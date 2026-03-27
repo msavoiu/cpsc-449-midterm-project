@@ -1,0 +1,44 @@
+// Organizer
+{
+  "name": "Jane Doe",
+  "email": "janedoe@gmail.com",
+  "phone": "123-456-7890"
+}
+
+// Venue
+{
+  "name": "Downtown Convention Center",
+  "address": "123 Main St",
+  "city": "Los Angeles, CA",
+  "totalCapacity": 40000
+}
+
+// Event
+{
+  "title": "Spring Boot Workshop",
+  "description": "A workshop on Spring Boot basics and best practices",
+  "eventDate": "2026-04-10",
+  "eventStatus": "UPCOMING",
+  "organizerId": 1,
+  "venueId": 1
+}
+
+// Attendee
+{
+  "name": "Mary Sue",
+  "email": "marysue@yahoo.com"
+}
+
+// Ticket Type
+{
+  "name": "General Admission",
+  "price": 100.0,
+  "quantityAvailable": 50,
+  "eventId": 1
+}
+
+// Booking
+{
+  "ticketTypeId": 1,
+  "attendeeId": 3
+}

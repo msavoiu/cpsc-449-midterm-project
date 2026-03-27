@@ -6,50 +6,50 @@ import com.app.entities.Booking;
 import com.app.enums.BookingStatus;
 
 public class BookingResponseDTO {
-    private String booking_reference;
-    private LocalDateTime booking_date;
-    private BookingStatus payment_status;
-    private String attendee_name;
-    private String event_title;
-    private String ticket_type_name;
+    private String bookingReference;
+    private LocalDateTime bookingDate;
+    private BookingStatus paymentStatus;
+    private String attendeeName;
+    private String eventTitle;
+    private String ticketTypeName;
     private Double price;
 
     public BookingResponseDTO(Booking booking) {
-        this.booking_reference = booking.getBookingReference();
-        this.booking_date = booking.getDate();
-        this.payment_status = booking.getPaymentStatus();
-        this.attendee_name = booking.getAttendee().getName();
-        this.event_title = booking.getEvent().getTitle();
-        this.ticket_type_name = booking.getTicketType().getName();
+        this.bookingReference = booking.getBookingReference();
+        this.bookingDate = booking.getDate();
+        this.paymentStatus = booking.getPaymentStatus();
+        this.attendeeName = booking.getAttendee().getName();
+        this.eventTitle = booking.getEvent().getTitle();
+        this.ticketTypeName = booking.getTicketType().getName();
         this.price = booking.getTicketType().getPrice();
     }
 
     // Getters
-    public String bookingReference() {
-        return booking_reference;
+    public String getBookingReference() {
+        return bookingReference;
     }
 
-    public LocalDateTime bookingDate() {
-        return booking_date;
+    public LocalDateTime getBookingDate() {
+        return bookingDate;
     }
 
-    public BookingStatus paymentStatus() {
-        return payment_status;
+    public BookingStatus getPaymentStatus() {
+        return paymentStatus;
     }
 
-    public String attendeeName() {
-        return attendee_name;
+    public String getAttendeeName() {
+        return attendeeName;
     }
 
-    public String eventTitle() {
-        return event_title;
+    public String getEventTitle() {
+        return eventTitle;
     }
     
-    public String ticketTypeName() {
-        return ticket_type_name;
+    public String getTicketTypeName() {
+        return ticketTypeName;
     }
 
-    public Double price() {
+    public Double getPrice() {
         return price;
     }
 }

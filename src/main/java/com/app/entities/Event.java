@@ -1,6 +1,7 @@
 package com.app.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.app.enums.EventStatus;
@@ -26,7 +27,7 @@ public class Event {
     @GeneratedValue(strategy =
         GenerationType.IDENTITY
     )
-    private Long event_id;
+    private Long eventId;
 
     @Column(name = "title",
         nullable = false,
@@ -43,19 +44,20 @@ public class Event {
     @Column(name = "event_date",
         updatable = false
     )
-    private LocalDate event_date;
+    private LocalDate eventDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "event_status",
         nullable = false)
-    private EventStatus event_status;
+    private EventStatus eventStatus;
 
     // Event -> Ticket Type relationship
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(
+        mappedBy = "event",
+        cascade = CascadeType.ALL,
         fetch = FetchType.LAZY
     )
-    @JoinColumn(name = "event_id")
-    private List<TicketType> ticket_types;
+    private List<TicketType> ticketTypes = new ArrayList<>();
 
     // Bi-directional relationships for accessing associated organizer and venue
     @ManyToOne(fetch = FetchType.LAZY)
@@ -71,7 +73,7 @@ public class Event {
 
     // Getters
     public Long getEventId() {
-        return event_id;
+        return eventId;
     }
 
     public String getTitle() {
@@ -83,15 +85,15 @@ public class Event {
     }
 
     public LocalDate getEventDate() {
-        return event_date;
+        return eventDate;
     }
 
     public EventStatus getEventStatus() {
-        return event_status;
+        return eventStatus;
     }
 
     public List<TicketType> getTicketTypes() {
-        return ticket_types;
+        return ticketTypes;
     }
 
     public Organizer getOrganizer() {
@@ -104,8 +106,8 @@ public class Event {
 
     
     // Setters
-    public void setEventId(Long event_id) {
-        this.event_id = event_id;
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
     }
 
     public void setTitle(String title) {
@@ -116,16 +118,16 @@ public class Event {
         this.description = description;
     }
 
-    public void setEventDate(LocalDate event_date) {
-        this.event_date = event_date;
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
     }
 
-    public void setEventStatus(EventStatus event_status) {
-        this.event_status = event_status;
+    public void setEventStatus(EventStatus eventStatus) {
+        this.eventStatus = eventStatus;
     }
 
-    public void setTicketTypes(List<TicketType> ticket_types) {
-        this.ticket_types = ticket_types;
+    public void setTicketTypes(List<TicketType> ticketTypes) {
+        this.ticketTypes = ticketTypes;
     }
 
     public void setOrganizer(Organizer organizer) {

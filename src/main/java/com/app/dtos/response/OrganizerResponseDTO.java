@@ -2,40 +2,30 @@ package com.app.dtos.response;
 
 import java.util.List;
 
+import com.app.dtos.EventDTO;
 import com.app.entities.Organizer;
 
 public class OrganizerResponseDTO {
     private String name;
     private String email;
     private String phone;
-    private List<EventResponseDTO> events;
 
     public OrganizerResponseDTO(Organizer organizer) {
         this.name = organizer.getName();
         this.email = organizer.getEmail();
         this.phone = organizer.getPhone();
-
-        // Map Event to EventResponseDTO
-        this.events = organizer.getEvents()
-            .stream()
-            .map(EventResponseDTO::new)
-            .toList();
     }
 
     // Getters
-    public String name() {
+    public String getName() {
         return name;
     }
 
-    public String email() {
+    public String getEmail() {
         return email;
     }
 
-    public String phone() {
+    public String getPhone() {
         return phone;
-    }
-
-    public List<EventResponseDTO> events() {
-        return events;
     }
 }

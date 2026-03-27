@@ -3,64 +3,62 @@ package com.app.dtos.response;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.app.dtos.TicketTypeDTO;
 import com.app.entities.Event;
 import com.app.enums.EventStatus;
 
 public class EventResponseDTO {
-    private Long event_id;
     private String title;
     private String description;
-    private LocalDate event_date;
-    private EventStatus event_status;
-    private List<TicketTypeDTO> ticket_types;
-    private String organizer_name;
-    private String venue_name;
+    private LocalDate eventDate;
+    private EventStatus eventStatus;
+    private List<TicketTypeDTO> ticketTypes;
+    private String organizerName;
+    private String venueName;
 
     public EventResponseDTO(Event event) {
         this.title = event.getTitle();
         this.description = event.getDescription();
-        this.event_date = event.getEventDate();
-        this.event_status = event.getEventStatus();
-        this.organizer_name = event.getOrganizer().getName();
-        this.venue_name = event.getVenue().getName();
+        this.eventDate = event.getEventDate();
+        this.eventStatus = event.getEventStatus();
+        this.organizerName = event.getOrganizer().getName();
+        this.venueName = event.getVenue().getName();
 
         // Map TicketType to TicketTypeDTO
-        this.ticket_types = event.getTicketTypes()
-            .stream()
-            .map(TicketTypeDTO::new)
-            .toList();
+        if (!event.getTicketTypes().isEmpty()) {
+            this.ticketTypes = event.getTicketTypes()
+                .stream()
+                .map(TicketTypeDTO::new)
+                .toList();
+        }
     }
 
     // Getters
-    public Long id() {
-        return event_id;
-    }
-
-    public String title() {
+    public String getTitle() {
         return title;
     }
 
-    public String description() {
+    public String getDescription() {
         return description;
     }
 
-    public LocalDate eventDate() {
-        return event_date;
+    public LocalDate getEventDate() {
+        return eventDate;
     }
 
-    public EventStatus eventStatus() {
-        return event_status;
+    public EventStatus getEventStatus() {
+        return eventStatus;
     }
 
-    public List<TicketTypeDTO> ticketTypes() {
-        return ticket_types;
+    public List<TicketTypeDTO> getTicketTypes() {
+        return ticketTypes;
     }
 
-    public String organizerName() {
-        return organizer_name;
+    public String getOrganizerName() {
+        return organizerName;
     }
 
-    public String venueName() {
-        return venue_name;
+    public String getVenueName() {
+        return venueName;
     }
 }

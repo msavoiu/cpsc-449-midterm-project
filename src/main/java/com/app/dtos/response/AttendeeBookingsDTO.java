@@ -3,20 +3,20 @@ package com.app.dtos.response;
 import java.util.List;
 
 public class AttendeeBookingsDTO {
-    private String attendee_name;
+    private String attendeeName;
     private List<BookingResponseDTO> bookings;
 
-    public AttendeeBookingsDTO(String attendee_name, List<BookingResponseDTO> bookings) {
-        this.attendee_name = attendee_name;
+    public AttendeeBookingsDTO(String attendeeName, List<BookingResponseDTO> bookings) {
+        this.attendeeName = attendeeName;
         this.bookings = bookings;
     }
 
     // Getters
-    String attendeeName() {
-        return attendee_name;
+    public String getAttendeeName() {
+        return attendeeName;
     }
 
-    List<BookingResponseDTO> bookings() {
+    public List<BookingResponseDTO> getBookings() {
         return bookings;
     }
 }

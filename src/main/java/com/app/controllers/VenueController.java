@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dtos.request.VenueRequestDTO;
 import com.app.dtos.response.VenueResponseDTO;
-import com.app.entities.Venue;
 import com.app.services.VenueService;
 
 @RestController
@@ -20,9 +20,9 @@ public class VenueController {
 
     // POST /api/venues
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Venue venue) {
+    public ResponseEntity<?> create(@RequestBody VenueRequestDTO venueReq) {
         try {
-            VenueResponseDTO dto = service.createVenue(venue);
+            VenueResponseDTO dto = service.createVenue(venueReq);
             return ResponseEntity.status(HttpStatus.CREATED).body(dto);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

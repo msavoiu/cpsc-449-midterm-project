@@ -20,9 +20,9 @@ public class OrganizerController {
 
     // POST /api/organizers
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody OrganizerRequestDTO organizer_req) {
+    public ResponseEntity<?> create(@RequestBody OrganizerRequestDTO organizerReq) {
         try {
-            OrganizerResponseDTO dto = service.createOrganizer(organizer_req);
+            OrganizerResponseDTO dto = service.createOrganizer(organizerReq);
             return ResponseEntity.status(HttpStatus.CREATED).body(dto);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

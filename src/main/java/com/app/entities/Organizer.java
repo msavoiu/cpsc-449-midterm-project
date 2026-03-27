@@ -1,5 +1,6 @@
 package com.app.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -9,7 +10,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -20,7 +20,7 @@ public class Organizer {
     @GeneratedValue(strategy =
         GenerationType.IDENTITY
     )
-    private Long organizer_id;
+    private Long organizerId;
 
     @Column(name = "name",
         nullable = false, // does this mean optional?
@@ -42,16 +42,17 @@ public class Organizer {
     private String phone;
 
     // Organizer -> Event relationship
-    @OneToMany(cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY
+    @OneToMany(mappedBy = "organizer",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true,
+        fetch = FetchType.EAGER
     )
-    @JoinColumn(name = "organizer_id")
-    private List<Event> events;
+    private List<Event> events = new ArrayList<>();
 
 
     // Getters
     public Long getOrganizerId() {
-        return organizer_id;
+        return organizerId;
     }
 
     public String getName() {
@@ -71,8 +72,8 @@ public class Organizer {
     }   
 
     // Setters
-    public void setOrganizerId(Long organizer_id) {
-        this.organizer_id = organizer_id;
+    public void setOrganizerId(Long organizerId) {
+        this.organizerId = organizerId;
     }
 
     public void setName(String name) {

@@ -20,7 +20,7 @@ public class Venue {
     @GeneratedValue(strategy =
         GenerationType.IDENTITY
     )
-    private Long venue_id;
+    private Long venueId;
 
     @Column(name = "name",
         nullable = false,
@@ -43,19 +43,18 @@ public class Venue {
     @Column(name = "total_capacity",
         nullable = false
     )
-    private Long total_capacity;
+    private int totalCapacity;
 
     // Venue -> Event relationship
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "venue",
+        cascade = CascadeType.ALL,
         fetch = FetchType.LAZY
     )
-    @JoinColumn(name = "venue_id")
     private List<Event> events;
-
 
     // Getters
     public Long getVenueId() {
-        return venue_id;
+        return venueId;
     }
 
     public String getName() {
@@ -70,11 +69,37 @@ public class Venue {
         return city;
     }
 
-    public Long getTotalCapacity() {
-        return total_capacity;
+    public int getTotalCapacity() {
+        return totalCapacity;
     }
 
     public List<Event> getEvents() {
         return events;
+    }
+
+
+    // Setters
+    public void setVenueId(Long venueId) {
+        this.venueId = venueId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setTotalCapacity(int totalCapacity) {
+        this.totalCapacity = totalCapacity;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }

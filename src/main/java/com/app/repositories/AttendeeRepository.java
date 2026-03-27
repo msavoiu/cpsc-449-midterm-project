@@ -16,7 +16,7 @@ public interface AttendeeRepository extends JpaRepository<Attendee, Long> {
     @Query("""
         SELECT new com.app.dtos.response.BookingResponseDTO(b)
         FROM Booking b
-        WHERE b.attendee.attendee_id = :id
+        WHERE b.attendee.attendeeId = :id
     """)
     public List<BookingResponseDTO> findBookings(@Param("id") Long id);
 }

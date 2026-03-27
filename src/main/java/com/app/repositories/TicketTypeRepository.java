@@ -1,7 +1,9 @@
 package com.app.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.app.entities.TicketType;
 
@@ -16,10 +18,12 @@ public interface TicketTypeRepository extends JpaRepository<TicketType, Long> {
     // public Long findQuantityAvailable(Long id);
     public Long findQuantityAvailableByTicketTypeId(Long id);
 
+    @Modifying
     @Query("""
             UPDATE TicketType tt
-            SET quantity_available = quantity_available - :decrement
-            WHERE tt.ticket_type_id = :id
+            SET tt.quantityAvailable = tt.quantityAvailable - :decrement
+            WHERE tt.ticketTypeId = :id
+                AND tt.quantityAvailable >= :decrement
             """)
-    public void decreaseQuantityAvailable(Long id, int decrement);
+    public int decreaseQuantityAvailable(@Param("id") Long id, @Param("decrement") int decrement);
 }
