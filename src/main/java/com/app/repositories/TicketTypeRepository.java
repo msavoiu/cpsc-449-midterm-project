@@ -9,13 +9,7 @@ import com.app.entities.TicketType;
 
 public interface TicketTypeRepository extends JpaRepository<TicketType, Long> {
     public TicketType findByTicketTypeId(Long id);
-    
-    // @Query("""
-    //         SELECT tt.quantity_available
-    //         FROM TicketType tt
-    //         WHERE tt.ticket_type_id = :id
-    //         """)
-    // public Long findQuantityAvailable(Long id);
+
     public Long findQuantityAvailableByTicketTypeId(Long id);
 
     @Modifying
