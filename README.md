@@ -7,6 +7,8 @@ The backend application is split into three logical tier by folder: the controll
 
 The application also defines several data transfer objects (DTOs) for passing information between the application's layers. These include the required DTOs outlined in the assignment, as well as other DTOs create to make API route development smoother.
 
+[Demo video](https://youtu.be/25pgGE0kCOc)
+
 ## API Testing
 ### POST /api/organizers
 ![img](readme_images/POST:api:organizers.png)
