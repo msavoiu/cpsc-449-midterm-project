@@ -5,7 +5,7 @@
 
 The backend application is split into three logical tier by folder: the controller, service, and repository layer. The files in the controller layer contain the definitions for required API routes for each entity. The service layer contains calls to the repository layer and functions containing underlying business logic that are called by the controllers.
 
-The application also defines several data transfer objects (DTOs) for passing information between the application's layers. These include the required DTOs outlined in the assignment, as well as additional classes that [help] other routes.
+The application also defines several data transfer objects (DTOs) for passing information between the application's layers. These include the required DTOs outlined in the assignment, as well as other DTOs create to make API route development smoother.
 
 ## API Testing
 ### POST /api/organizers
